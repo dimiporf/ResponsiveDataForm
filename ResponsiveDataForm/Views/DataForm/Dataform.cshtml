@@ -14,37 +14,46 @@
        
     .container {
         max-width: 1000px;
-        margin: 50px auto;
+        margin: auto;
         background-color: #fff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        font-size: 1rem; /* Default font size */
+        font-size: 1rem; 
     }
 
     form {
         background-color: #f8f9fa;
         color: #333;
         font-size: 16px;
-        padding: 20px; /* Add some padding for better readability */
+        padding: 20px; 
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        min-width: 150px;
     }
     .form-group {
         margin-bottom: 20px;
+        min-width: 150px;
     }
 
     .form-group label {
         display: block;
         margin-bottom: 8px;
-        font-size: 1.2rem; /* Larger font size on desktop */
+        font-size: 16px;
+        min-width: 150px;        
+        padding-right: 2rem; /* Add padding to the right of the label */
+        
     }
 
     .form-group input {
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
-        font-size: 1rem; /* Default font size on desktop */
+        font-size: 1rem;
+        min-width: 150px;
+    }
+    .form-check input{
+        margin-left: 50px;
     }
 
     .btn-submit {
@@ -55,8 +64,15 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 1.2rem; /* Larger font size on desktop */
+        min-width: 100px; /* Set a minimum width for the button */
     }
 
+        .img-container {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px; /* Set a maximum height for the image container */
+            margin-top: 10px; /* Add some margin for separation */
+        }
          
    
 
@@ -65,7 +81,7 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container  mt-md-4 mt-lg-5">
         <h2 class="mb-4">Dataform</h2>
         <form>
             <div class="form-row">
@@ -89,10 +105,79 @@
                     <label for="address">Address:</label>
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
-                <div class="form-group col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label for="city">City:</label>
-                    <input type="text" class="form-control" id="city" name="city" required>
+                <!-- Country Selector -->
+                <div class="form-group  col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label for="country">Country:</label>
+                    <select class="form-control" id="country" name="country">
+                        <option value="de">Deutschland</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="gr">Greece</option>
+                        <option value="usa">United States</option>
+                        <!-- Add more countries as needed -->
+                    </select>
                 </div>
+
+                <!-- Separator Line -->
+                <div class="col-12">
+                    <hr>
+                </div>
+
+            <!-- Email and Push Notifications on the same row for larger screens -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <h3>Email Notifications</h3>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="comments" name="comments">
+                        <label class="form-check-label" for="comments">
+                            Comments
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="candidates" name="candidates">
+                        <label class="form-check-label" for="candidates">
+                            Candidates
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="offers" name="offers">
+                        <label class="form-check-label" for="offers">
+                            Offers
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <h3>Push Notifications</h3>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pushNotifications" id="everything" value="everything" checked>
+                        <label class="form-check-label" for="everything">
+                            Everything
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pushNotifications" id="sameAsEmail" value="sameAsEmail">
+                        <label class="form-check-label" for="sameAsEmail">
+                            Same as Email
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pushNotifications" id="noPushNotifications" value="noPushNotifications">
+                        <label class="form-check-label" for="noPushNotifications">
+                            No Push Notifications
+                        </label>
+                    </div>
+                    <small class="form-text text-muted">
+                        These are delivered via SMS to your mobile phone.
+                    </small>
+                </div>
+            </div>
+
+                <div class="form-group col-md-4">
+                <h3>Profile Picture:</h3>                
+                <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+                <!-- Placeholder for displaying the selected image -->
+                <img id="selectedImage" class="img-container mt-2" src="#" alt="Selected Image">
             </div>
 
             <button type="submit" class="btn btn-dark btn-submit btn-block">Submit</button>
@@ -102,6 +187,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('profilePic').addEventListener('change', function (e) {
+            var image = document.getElementById('selectedImage');
+            image.src = URL.createObjectURL(e.target.files[0]);
+        });
+    </script>
 
 </body>
 </html>
